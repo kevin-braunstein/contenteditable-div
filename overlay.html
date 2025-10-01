@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Editor with Overlay Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #1c1e21;
+            padding: 2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .editor-wrapper {
+            width: 100%;
+            max-width: 800px;
+            background-color: #ffffff;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            padding: 12px 16px;
+        }
+
+        /* 
+         * This container is crucial. Its 'position: relative' creates a 
+         * positioning context for the absolute overlay inside it.
+         */
+        .editor-group {
+            position: relative;
+            border: 1px dashed #f06292; /* Pink dashed border for visibility */
+        }
+
+        #editorDiv {
+            min-height: 250px;
+            outline: none;
+            font-size: 16px;
+            line-height: 1.5;
+            background-color: #e3f2fd; /* Light blue to see it clearly */
+        }
+
+        #editorDiv:empty::before {
+            content: "Tap here to add a message...";
+            color: #8a8d91;
+            pointer-events: none;
+        }
+
+        /* 
+         * This is the potential culprit. It's an overlay that sits on top
+         * of the editorDiv. It's transparent but will still intercept touch events.
+         */
+        #overlayDiv {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 100, 100, 0.2); /* Semi-transparent red for visibility */
+            z-index: 10; /* Ensure it's on top */
+        }
+
+        .controls {
+            margin-bottom: 1rem;
+            background: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Editor with Overlay</h1>
+    <p>This example simulates an invisible overlay element blocking touch events.</p>
+
+    <div class="controls">
+        <label>
+            <input type="checkbox" id="toggleOverlay">
+            Enable the problematic overlay
+        </label>
+    </div>
+
+    <div class="editor-wrapper">
+        <!-- This container mimics the structure like 'i3Ser' in your code -->
+        <div class="editor-group">
+            
+            <!-- The Rich Text Editor -->
+            <div id="editorDiv" 
+                 contenteditable="true" 
+                 role="textbox" 
+                 aria-multiline="true" 
+                 aria-label="Add a message">
+            </div>
+
+            <!-- The Invisible Overlay -->
+            <div id="overlayDiv" style="display: none;"></div>
+
+        </div>
+    </div>
+
+    <script>
+        const toggleCheckbox = document.getElementById('toggleOverlay');
+        const overlayDiv = document.getElementById('overlayDiv');
+
+        toggleCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                // Show the overlay, which will block the editor
+                overlayDiv.style.display = 'block';
+                console.log('Overlay is now ENABLED. The editor should be blocked.');
+            } else {
+                // Hide the overlay, allowing interaction with the editor
+                overlayDiv.style.display = 'none';
+                console.log('Overlay is now DISABLED. The editor should be interactive.');
+            }
+        });
+    </script>
+
+</body>
+</html>
