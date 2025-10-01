@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User-Select Contenteditable Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #1c1e21;
+            padding: 2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Simulate the problematic body style from your context */
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 0.5em;
+        }
+
+        p {
+            margin-bottom: 1.5em;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .editor-group {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 1.5em;
+            background-color: #ffffff;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+
+        .editor-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5em;
+            color: #333;
+        }
+
+        .editor-div {
+            min-height: 100px;
+            padding: 12px 16px;
+            outline: none;
+            font-size: 16px;
+            line-height: 1.5;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: #fdfdfd;
+            color: #333;
+        }
+
+        .editor-div:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        .editor-div:empty::before {
+            content: "Type here...";
+            color: #8a8d91;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>User-Select Contenteditable Test</h1>
+    <p>This page tests how different <code>-webkit-user-select</code> and <code>user-select</code> properties affect contenteditable divs, especially when the <code>&lt;body&gt;</code> has <code>-webkit-user-select: none;</code>.</p>
+
+    <div class="editor-group">
+        <label>1. <code>-webkit-user-select: all;</code> (and <code>user-select: all;</code> for cross-browser)</label>
+        <div class="editor-div" contenteditable="true" style="-webkit-user-select: all; user-select: all;"></div>
+    </div>
+
+    <div class="editor-group">
+        <label>2. <code>-webkit-user-select: text;</code> (and <code>user-select: text;</code> for cross-browser)</label>
+        <div class="editor-div" contenteditable="true" style="-webkit-user-select: text; user-select: text;"></div>
+    </div>
+
+    <div class="editor-group">
+        <label>3. No explicit <code>user-select</code> property (inherits from body)</label>
+        <div class="editor-div" contenteditable="true"></div>
+    </div>
+
+</body>
+</html>
