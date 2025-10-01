@@ -13,9 +13,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* Simulate the problematic body style from your context */
-            -webkit-user-select: none;
-            user-select: none;
         }
 
         h1 {
@@ -74,21 +71,41 @@
 <body>
 
     <h1>User-Select Contenteditable Test</h1>
-    <p>This page tests how different <code>-webkit-user-select</code> and <code>user-select</code> properties affect contenteditable divs, especially when the <code>&lt;body&gt;</code> has <code>-webkit-user-select: none;</code>.</p>
+    <p>This page tests how different <code>-webkit-user-select</code> and <code>user-select</code> properties affect contenteditable divs individually and combined.</p>
 
     <div class="editor-group">
-        <label>1. <code>-webkit-user-select: all;</code> (and <code>user-select: all;</code> for cross-browser)</label>
+        <label>1. No <code>user-select</code> property (Control)</label>
+        <div class="editor-div" contenteditable="true"></div>
+    </div>
+
+    <div class="editor-group">
+        <label>2. <code>-webkit-user-select: all;</code></label>
+        <div class="editor-div" contenteditable="true" style="-webkit-user-select: all;"></div>
+    </div>
+
+    <div class="editor-group">
+        <label>3. <code>-webkit-user-select: text;</code></label>
+        <div class="editor-div" contenteditable="true" style="-webkit-user-select: text;"></div>
+    </div>
+
+    <div class="editor-group">
+        <label>4. <code>user-select: all;</code></label>
+        <div class="editor-div" contenteditable="true" style="user-select: all;"></div>
+    </div>
+
+    <div class="editor-group">
+        <label>5. <code>user-select: text;</code></label>
+        <div class="editor-div" contenteditable="true" style="user-select: text;"></div>
+    </div>
+
+    <div class="editor-group">
+        <label>6. Combined: <code>-webkit-user-select: all; user-select: all;</code></label>
         <div class="editor-div" contenteditable="true" style="-webkit-user-select: all; user-select: all;"></div>
     </div>
 
     <div class="editor-group">
-        <label>2. <code>-webkit-user-select: text;</code> (and <code>user-select: text;</code> for cross-browser)</label>
+        <label>7. Combined: <code>-webkit-user-select: text; user-select: text;</code></label>
         <div class="editor-div" contenteditable="true" style="-webkit-user-select: text; user-select: text;"></div>
-    </div>
-
-    <div class="editor-group">
-        <label>3. No explicit <code>user-select</code> property (inherits from body)</label>
-        <div class="editor-div" contenteditable="true"></div>
     </div>
 
 </body>
