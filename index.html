@@ -1,39 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Editable Div</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: #f5f5f5;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Content-Editable Editor</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #1c1e21;
+            padding: 2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    .editable {
-      width: 100%;
-      min-height: 200px;
-      border: 1px solid #ccc;
-      padding: 10px;
-      background-color: #fff;
-      border-radius: 5px;
-      box-sizing: border-box;
-      font-size: 16px;
-    }
+        h1 {
+            color: #333;
+        }
 
-    .editable:focus {
-      outline: 2px solid #007aff; /* iOS-style blue */
-    }
-  </style>
+        .editor-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #ffffff;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        #editorDiv {
+            min-height: 250px;
+            padding: 12px 16px;
+            outline: none;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        #editorDiv:empty::before {
+            content: "Add a message...";
+            color: #8a8d91;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
 
-  <h1>Editable Content</h1>
-  <div class="editable" contenteditable="true" spellcheck="true">
-    Tap here to edit this text...
-  </div>
+    <h1>Simple Editor</h1>
+    <p>This is a basic rich text editor created using a content-editable div.</p>
+
+    <div class="editor-container">
+        <div id="editorDiv" 
+             contenteditable="true" 
+             role="textbox" 
+             aria-multiline="true" 
+             aria-label="Add a message">
+        </div>
+    </div>
 
 </body>
 </html>
