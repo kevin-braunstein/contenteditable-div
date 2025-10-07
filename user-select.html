@@ -108,5 +108,29 @@
         <div class="editor-div" contenteditable="true" style="-webkit-user-select: text; user-select: text;"></div>
     </div>
 
+    <div class="editor-group">
+        <label>CSS.supports() API Results</label>
+        <div id="supports-results" class="editor-div" style="min-height: unset; background-color: #f0f2f5; border: none; box-shadow: none;">
+            <!-- Results will be injected here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tests = [
+                { property: '-webkit-user-select', value: 'all' },
+                { property: '-webkit-user-select', value: 'text' },
+                { property: 'user-select', value: 'all' },
+                { property: 'user-select', value: 'text' }
+            ];
+
+            const resultsContainer = document.getElementById('supports-results');
+
+            tests.forEach(test => {
+                const isSupported = CSS.supports(test.property, test.value);
+                resultsContainer.innerHTML += `<p style="margin: 4px 0; font-family: monospace;">CSS.supports('${test.property}', '${test.value}'): <strong>${isSupported}</strong></p>`;
+            });
+        });
+    </script>
 </body>
 </html>
